@@ -1,0 +1,67 @@
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="159dp"
+            android:layout_height="58dp"
+            android:id="@+id/et" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:id="@+id/button" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map Type"
+            android:id="@+id/btype"
+            android:onClick="changeType" />
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<FrameLayout
+    android:layout_width="388dp"
+    android:layout_height="wrap_content">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="376dp"
+        android:layout_height="459dp" android:id="@+id/map" tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="right|bottom">
+            <Button
+                android:layout_width="59dp"
+                android:layout_height="wrap_content"
+
+                android:text="+"
+                android:id="@+id/Bzoomin"
+                android:onClick="onZoom" />
+
+            <Button
+                android:layout_width="61dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:id="@+id/Bzoomout"
+
+                android:onClick="onZoom" />
+            </LinearLayout>
+
+
+</FrameLayout>
+</LinearLayout>
+</LinearLayout>
