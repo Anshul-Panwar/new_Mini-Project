@@ -7,6 +7,10 @@ import android.app.*;
   import android.widget.Button;
   import android.widget.TextView;
 
+  import org.json.JSONArray;
+  import org.json.JSONException;
+  import org.json.JSONObject;
+
   import java.io.BufferedReader;
   import java.io.IOException;
   import java.io.InputStream;
@@ -14,6 +18,8 @@ import android.app.*;
   import java.net.HttpURLConnection;
   import java.net.MalformedURLException;
   import java.net.URL;
+  import java.util.ArrayList;
+  import java.util.List;
 
 public class RailwayActivity extends MapsActivity {
     TextView tv;String source,destination;
@@ -30,7 +36,8 @@ Button b1;
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new JSONtask().execute("");
+                new JSONtask().execute(" http://api.railwayapi.com/name_to_code/station/"+source+"/apikey/btxhj9442/");
+                new JSONtask().execute(" http://api.railwayapi.com/name_to_code/station/"+destination+"/apikey/btxhj9442/");
             }
         });
 
@@ -40,7 +47,7 @@ Button b1;
 
     public class JSONtask extends AsyncTask<String, String, String> {
 
-
+       // ArrayList<RailwayActivity> traincodelist= new ArrayList<>();
         @Override
         protected String doInBackground(String... params) {
             HttpURLConnection connection = null;
@@ -57,11 +64,22 @@ Button b1;
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line);
                 }
-              return buffer.toString();
+                 String finalJson= buffer.toString();
+
+                JSONObject parentobject= new JSONObject(finalJson);
+                JSONArray parentarray= new JSONArray("stations");
+                JSONObject finalobject=parentarray.getJSONObject(0);
+                String fullname=finalobject.getString("fullname");
+                String code=finalobject.getString("code");
+
+
+              return fullname +" - "+ code;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             } finally {
                 if (connection != null) {
