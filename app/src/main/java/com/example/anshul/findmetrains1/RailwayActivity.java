@@ -16,7 +16,7 @@ import android.app.*;
   import java.net.URL;
 
 public class RailwayActivity extends MapsActivity {
-    TextView tv;
+    TextView tv;String source,destination;
 Button b1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,13 @@ Button b1;
         setContentView(R.layout.railwaylayout);
         Bundle b = this.getIntent().getExtras();
         String array[] = b.getStringArray("key");
+        source=array[0];
+        destination=array[1];
         b1=(Button)findViewById(R.id.button);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new JSONtask().execute("https://maps.googleapis.com/maps/api/directions/json?origin=\"+array[0]+\"&destination=\"+array[1]+\"&transit_mode=train&key=");
+                new JSONtask().execute("");
             }
         });
 
